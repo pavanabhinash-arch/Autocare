@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AutoCare - Customer Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div id="customerPage">
+
+
+    <!-- =====================================================
+         TOP NAVBAR
+    ====================================================== -->
+
+    <header class="dashboard-navbar">
+
+
+        <div class="dashboard-logo">
+
+            🔧 Auto<span>Care</span>
+
+        </div>
+
+
+        <div class="nav-user">
+
+            <div class="user-mini">
+
+                <div class="user-avatar">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong id="navUserName">
+                        Customer
+                    </strong>
+
+                    <small>
+                        Customer Account
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout-btn"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN DASHBOARD LAYOUT
+    ====================================================== -->
+
+    <div class="dashboard-container">
+
+
+        <!-- =================================================
+             LEFT SIDEBAR
+        ================================================== -->
+
+        <aside class="sidebar">
+
+
+            <div class="sidebar-title">
+
+                <span>
+                    CUSTOMER MENU
+                </span>
+
+            </div>
+
+
+            <a href="#dashboard"
+               class="sidebar-link active"
+               data-section="dashboard">
+
+                <span class="sidebar-icon">
+                    🏠
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="#vehicles"
+               class="sidebar-link"
+               data-section="vehicles">
+
+                <span class="sidebar-icon">
+                    🚗
+                </span>
+
+                <span>
+                    My Vehicles
+                </span>
+
+            </a>
+
+
+            <a href="#bookings"
+               class="sidebar-link"
+               data-section="bookings">
+
+                <span class="sidebar-icon">
+                    📅
+                </span>
+
+                <span>
+                    My Bookings
+                </span>
+
+            </a>
+
+
+            <a href="#history"
+               class="sidebar-link"
+               data-section="history">
+
+                <span class="sidebar-icon">
+                    🔧
+                </span>
+
+                <span>
+                    Service History
+                </span>
+
+            </a>
+
+
+            <a href="#invoices"
+               class="sidebar-link"
+               data-section="invoices">
+
+                <span class="sidebar-icon">
+                    💰
+                </span>
+
+                <span>
+                    Invoices
+                </span>
+
+            </a>
+
+
+            <a href="#profile"
+               class="sidebar-link"
+               data-section="profile">
+
+                <span class="sidebar-icon">
+                    👤
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+
+            <div class="sidebar-bottom">
+
+                <div class="help-card">
+
+                    <div class="help-icon">
+                        💬
+                    </div>
+
+                    <strong>
+                        Need Help?
+                    </strong>
+
+                    <p>
+                        Contact AutoCare support.
+                    </p>
+
+                    <button onclick="showSupport()">
+                        Contact Support
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- =================================================
+             RIGHT SIDE CONTENT
+        ================================================== -->
+
+        <main class="dashboard-content">
+
+
+            <!-- =================================================
+                 DASHBOARD HOME
+            ================================================== -->
+
+            <section
+                id="dashboardSection"
+                class="dashboard-view active-view">
+
+
+                <div class="welcome-section">
+
+
+                    <div>
+
+                        <span class="dashboard-label">
+                            CUSTOMER DASHBOARD
+                        </span>
+
+
+                        <h1>
+
+                            Welcome,
+
+                            <span id="dashboardCustomerName">
+                                Customer
+                            </span>
+
+                            👋
+
+                        </h1>
+
+
+                        <p>
+                            Manage your vehicles, bookings and
+                            service information from one place.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="primary-dashboard-btn"
+                        onclick="openAddVehicle()">
+
+                        + Add Vehicle
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STAT CARDS
+                ================================================== -->
+
+                <div class="stats">
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+                            🚗
+                        </div>
+
+                        <div>
+
+                            <span>
+                                My Vehicles
+                            </span>
+
+                            <h3 id="vehicleCount">
+                                0
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon purple">
+                            📅
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Upcoming Bookings
+                            </span>
+
+                            <h3 id="bookingCount">
+                                0
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+                            🔧
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Completed Services
+                            </span>
+
+                            <h3 id="completedCount">
+                                0
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon orange">
+                            💰
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Total Services
+                            </span>
+
+                            <h3 id="totalServiceCount">
+                                0
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     QUICK ACTIONS
+                ================================================== -->
+
+                <section class="dashboard-section">
+
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span class="section-small-title">
+                                QUICK ACTIONS
+                            </span>
+
+                            <h2>
+                                What would you like to do?
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <button
+                            class="quick-action-card"
+                            onclick="openAddVehicle()">
+
+                            <div class="quick-icon">
+                                🚗
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Add Vehicle
+                                </strong>
+
+                                <span>
+                                    Register a new vehicle
+                                </span>
+
+                            </div>
+
+                            <b>
+                                →
+                            </b>
+
+                        </button>
+
+
+
+                        <button
+                            class="quick-action-card"
+                            onclick="goToBooking()">
+
+                            <div class="quick-icon">
+                                📅
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Book Service
+                                </strong>
+
+                                <span>
+                                    Schedule vehicle service
+                                </span>
+
+                            </div>
+
+                            <b>
+                                →
+                            </b>
+
+                        </button>
+
+
+
+                        <button
+                            class="quick-action-card"
+                            onclick="showDashboardSection('history')">
+
+                            <div class="quick-icon">
+                                📋
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Service History
+                                </strong>
+
+                                <span>
+                                    View previous services
+                                </span>
+
+                            </div>
+
+                            <b>
+                                →
+                            </b>
+
+                        </button>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     UPCOMING BOOKING
+                ================================================== -->
+
+                <section class="dashboard-section">
+
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span class="section-small-title">
+                                NEXT APPOINTMENT
+                            </span>
+
+                            <h2>
+                                Upcoming Service
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            class="outline-btn"
+                            onclick="goToBooking()">
+
+                            + Book Service
+
+                        </button>
+
+                    </div>
+
+
+                    <div id="upcomingBookingContainer">
+
+                        <div class="empty-state">
+
+                            <div>
+                                📅
+                            </div>
+
+                            <h3>
+                                No upcoming booking
+                            </h3>
+
+                            <p>
+                                You don't have an upcoming
+                                service appointment.
+                            </p>
+
+                            <button
+                                onclick="goToBooking()">
+
+                                Book a Service
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- =================================================
+                     RECENT VEHICLES
+                ================================================== -->
+
+                <section class="dashboard-section">
+
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span class="section-small-title">
+                                YOUR GARAGE
+                            </span>
+
+                            <h2>
+                                My Vehicles
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            class="outline-btn"
+                            onclick="showDashboardSection('vehicles')">
+
+                            View All
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="dashboardVehicleGrid"
+                        class="vehicle-grid">
+
+                    </div>
+
+
+                </section>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MY VEHICLES
+            ================================================== -->
+
+            <section
+                id="vehiclesSection"
+                class="dashboard-view">
+
+
+                <div class="page-header">
+
+
+                    <div>
+
+                        <span class="dashboard-label">
+                            GARAGE
+                        </span>
+
+                        <h1>
+                            My Vehicles
+                        </h1>
+
+                        <p>
+                            Manage all vehicles connected
+                            to your AutoCare account.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="primary-dashboard-btn"
+                        onclick="openAddVehicle()">
+
+                        + Add Vehicle
+
+                    </button>
+
+
+                </div>
+
+
+
+                <div
+                    id="fullVehicleGrid"
+                    class="vehicle-grid large-grid">
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MY BOOKINGS
+            ================================================== -->
+
+            <section
+                id="bookingsSection"
+                class="dashboard-view">
+
+
+                <div class="page-header">
+
+
+                    <div>
+
+                        <span class="dashboard-label">
+                            APPOINTMENTS
+                        </span>
+
+                        <h1>
+                            My Bookings
+                        </h1>
+
+                        <p>
+                            Track your service appointments.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="primary-dashboard-btn"
+                        onclick="goToBooking()">
+
+                        + Book Service
+
+                    </button>
+
+
+                </div>
+
+
+
+                <div
+                    id="fullBookingList"
+                    class="booking-list">
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SERVICE HISTORY
+            ================================================== -->
+
+            <section
+                id="historySection"
+                class="dashboard-view">
+
+
+                <div class="page-header">
+
+
+                    <div>
+
+                        <span class="dashboard-label">
+                            SERVICE RECORDS
+                        </span>
+
+                        <h1>
+                            Service History
+                        </h1>
+
+                        <p>
+                            View your completed vehicle services.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="history-table">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Vehicle
+                                </th>
+
+                                <th>
+                                    Service
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="historyTableBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 INVOICES
+            ================================================== -->
+
+            <section
+                id="invoicesSection"
+                class="dashboard-view">
+
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="dashboard-label">
+                            BILLING
+                        </span>
+
+                        <h1>
+                            Invoices
+                        </h1>
+
+                        <p>
+                            View your service invoices.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="empty-state large-empty">
+
+                    <div>
+                        💰
+                    </div>
+
+                    <h3>
+                        No invoices available
+                    </h3>
+
+                    <p>
+                        Your invoices will appear here
+                        after completed services.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 PROFILE
+            ================================================== -->
+
+            <section
+                id="profileSection"
+                class="dashboard-view">
+
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="dashboard-label">
+                            ACCOUNT
+                        </span>
+
+                        <h1>
+                            My Profile
+                        </h1>
+
+                        <p>
+                            Your AutoCare account information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="profile-card">
+
+
+                    <div class="profile-avatar">
+                        👤
+                    </div>
+
+
+                    <div class="profile-information">
+
+
+                        <div class="profile-row">
+
+                            <span>
+                                Full Name
+                            </span>
+
+                            <strong id="profileName">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-row">
+
+                            <span>
+                                Email
+                            </span>
+
+                            <strong id="profileEmail">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-row">
+
+                            <span>
+                                Phone
+                            </span>
+
+                            <strong id="profilePhone">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-row">
+
+                            <span>
+                                Account Type
+                            </span>
+
+                            <strong>
+                                Customer
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ADD VEHICLE MODAL
+    ====================================================== -->
+
+    <div
+        id="vehicleModal"
+        class="modal-overlay">
+
+
+        <div class="vehicle-modal">
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="dashboard-label">
+                        GARAGE
+                    </span>
+
+                    <h2>
+                        Add New Vehicle
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="modal-close"
+                    onclick="closeAddVehicle()">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+
+            <form id="vehicleForm">
+
+
+                <div class="modal-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Vehicle Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newVehicleNumber"
+                            placeholder="AP 01 AB 1234"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Brand
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newVehicleBrand"
+                            placeholder="Hyundai"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Model
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newVehicleModel"
+                            placeholder="Creta"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Year
+                        </label>
+
+                        <input
+                            type="number"
+                            id="newVehicleYear"
+                            placeholder="2024"
+                            min="1900"
+                            max="2100"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Fuel Type
+                        </label>
+
+                        <select
+                            id="newVehicleFuel"
+                            required>
+
+                            <option value="">
+                                Select Fuel Type
+                            </option>
+
+                            <option value="Petrol">
+                                Petrol
+                            </option>
+
+                            <option value="Diesel">
+                                Diesel
+                            </option>
+
+                            <option value="Electric">
+                                Electric
+                            </option>
+
+                            <option value="Hybrid">
+                                Hybrid
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <p
+                    id="vehicleMessage"
+                    class="form-message">
+                </p>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="closeAddVehicle()">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="save-btn">
+
+                        Save Vehicle
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SUPPORT MODAL
+    ====================================================== -->
+
+    <div
+        id="supportModal"
+        class="modal-overlay">
+
+
+        <div class="small-modal">
+
+
+            <button
+                class="modal-close"
+                onclick="closeSupport()">
+
+                ×
+
+            </button>
+
+
+            <div class="support-icon">
+                💬
+            </div>
+
+
+            <h2>
+                AutoCare Support
+            </h2>
+
+
+            <p>
+                Our support team is ready to help.
+            </p>
+
+
+            <div class="support-details">
+
+                <p>
+                    📞 +91 98765 43210
+                </p>
+
+                <p>
+                    📧 support@autocare.com
+                </p>
+
+            </div>
+
+
+            <button
+                class="save-btn"
+                onclick="closeSupport()">
+
+                Close
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

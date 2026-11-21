@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoCare - Automobile Service Center</title>
+
+    <style>
+        /* ================= THEME COLORS ================= */
+        :root {
+            --bg: #f6f7fb;
+            --card: #ffffff;
+            --tx: #1b1f2a;
+            --mut: #6b7280;
+            --pri: #e63946;
+            --pri2: #ff6b6b;
+            --bd: #e5e7eb;
+            --ok: #16a34a;
+            --sh: 0 6px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f1218;
+            --card: #1a1f2b;
+            --tx: #eef0f4;
+            --mut: #9aa3b2;
+            --bd: #2a3140;
+            --sh: 0 6px 24px rgba(0, 0, 0, 0.4);
+        }
+
+
+        /* ================= BASE ================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--tx);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer;
+            border: 0;
+        }
+
+        .hide {
+            display: none !important;
+        }
+
+        .wrap {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .mb {
+            margin-bottom: 14px;
+        }
+
+        .spaced {
+            margin: 20px 0;
+        }
+
+        .sub {
+            color: var(--mut);
+            margin-bottom: 14px;
+        }
+
+        .link {
+            color: var(--pri);
+        }
+
+        .upper {
+            text-transform: uppercase;
+        }
+
+
+        /* ================= NAVBAR ================= */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--card);
+            box-shadow: var(--sh);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            height: 64px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .logo span {
+            color: var(--pri);
+        }
+
+        .links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .links a {
+            color: var(--mut);
+            font-weight: 500;
+        }
+
+        .links a:hover {
+            color: var(--pri);
+        }
+
+        .menu {
+            display: none;
+        }
+
+
+        /* ================= BUTTONS ================= */
+        .btn {
+            background: linear-gradient(135deg, var(--pri), var(--pri2));
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .btn.ghost {
+            background: transparent;
+            color: var(--tx);
+            border: 1px solid var(--bd);
+        }
+
+        .btn.sm {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .btn.full {
+            width: 100%;
+        }
+
+        .icon-btn {
+            background: var(--bg);
+            color: var(--tx);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+        }
+
+
+        /* ================= HERO ================= */
+        .hero {
+            padding: 80px 0;
+            background: radial-gradient(circle at 80% 20%, rgba(230, 57, 70, 0.15), transparent 50%);
+        }
+
+        .hero .wrap {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.15;
+            margin: 10px 0;
+        }
+
+        .hero h1 span {
+            color: var(--pri);
+        }
+
+        .hero p {
+            color: var(--mut);
+        }
+
+        .tag {
+            color: var(--pri);
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .stats {
+            display: flex;
+            gap: 28px;
+            margin-top: 20px;
+        }
+
+        .stats b {
+            font-size: 1.7rem;
+            display: block;
+        }
+
+        .stats small {
+            color: var(--mut);
+        }
+
+        .track {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 18px;
+            box-shadow: var(--sh);
+        }
+
+        .track h3 {
+            margin-bottom: 10px;
+        }
+
+        .track-out {
+            margin-top: 14px;
+        }
+
+
+        /* ================= FORMS ================= */
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid var(--bd);
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--tx);
+            font: inherit;
+            margin: 4px 0 12px;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--mut);
+        }
+
+        .msg {
+            font-size: 0.9rem;
+            margin-top: 8px;
+            min-height: 20px;
+            color: var(--pri);
+        }
+
+
+        /* ================= SECTIONS ================= */
+        section.s {
+            padding: 70px 0;
+        }
+
+        section.alt {
+            background: var(--card);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .title h2 {
+            font-size: 2rem;
+        }
+
+        .title p {
+            color: var(--mut);
+        }
+
+        .title .tag {
+            color: var(--pri);
+        }
+
+
+        /* ================= CARDS ================= */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--sh);
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card .ic {
+            font-size: 2.2rem;
+        }
+
+        .card h3 {
+            margin: 8px 0 4px;
+        }
+
+        .card p {
+            color: var(--mut);
+            font-size: 0.92rem;
+        }
+
+        .price {
+            color: var(--pri);
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+
+        /* ================= SCROLL ANIMATION ================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: 0.6s;
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+
+
+        /* ================= BOOKING WIZARD ================= */
+        .box {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .steps {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .steps div {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            background: var(--bg);
+            font-size: 0.8rem;
+            color: var(--mut);
+        }
+
+        .steps .on {
+            background: var(--pri);
+            color: #fff;
+        }
+
+        .chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 6px 0 14px;
+        }
+
+        .chip {
+            padding: 8px 14px;
+            border: 1px solid var(--bd);
+            border-radius: 20px;
+            background: var(--bg);
+            color: var(--tx);
+        }
+
+        .chip.sel {
+            background: var(--pri);
+            color: #fff;
+            border-color: var(--pri);
+        }
+
+        .chip:disabled {
+            opacity: 0.35;
+            text-decoration: line-through;
+            cursor: not-allowed;
+        }
+
+        .est {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 14px;
+            margin: 10px 0;
+        }
+
+        .est div {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .est .t {
+            font-weight: 800;
+            border-top: 1px dashed var(--bd);
+            margin-top: 6px;
+            padding-top: 6px;
+        }
+
+
+        /* ================= LOGIN / REGISTER ================= */
+        .auth {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+        }
+
+        .auth .card {
+            width: 100%;
+            max-width: 420px;
+        }
+
+
+        /* ================= DASHBOARD ================= */
+        .dash {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 24px;
+            padding: 24px 20px;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .side a {
+            display: block;
+            padding: 11px 14px;
+            border-radius: 10px;
+            color: var(--mut);
+            margin-bottom: 4px;
+            cursor: pointer;
+        }
+
+        .side a.on,
+        .side a:hover {
+            background: var(--pri);
+            color: #fff;
+        }
+
+        .bk {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .pill {
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .pill.Delivered {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        #invoice {
+            margin-top: 16px;
+        }
+
+
+        /* ================= STATUS PROGRESS BAR ================= */
+        .prog {
+            display: flex;
+            margin: 14px 0 4px;
+        }
+
+        .prog div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--mut);
+        }
+
+        .prog div::before {
+            content: "";
+            display: block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bd);
+            margin: 0 auto 4px;
+        }
+
+        .prog div.done {
+            color: var(--tx);
+        }
+
+        .prog div.done::before {
+            background: var(--ok);
+        }
+
+
+        /* ================= TABLE ================= */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--bd);
+            font-size: 0.9rem;
+        }
+
+
+        /* ================= TOAST + FOOTER ================= */
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #111;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 99;
+            pointer-events: none;
+        }
+
+        #toast.show {
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--mut);
+            border-top: 1px solid var(--bd);
+        }
+
+
+        /* ================= MOBILE ================= */
+        @media (max-width: 800px) {
+
+            .hero .wrap,
+            .dash {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            .links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--card);
+                flex-direction: column;
+                padding: 16px;
+            }
+
+            .links.open {
+                display: flex;
+            }
+        }
+
+
+        /* ================= PRINT (invoice only) ================= */
+        @media print {
+
+            body * {
+                visibility: hidden;
+            }
+
+            #invoice,
+            #invoice * {
+                visibility: visible;
+            }
+
+            #invoice {
+                position: absolute;
+                inset: 0;
+                background: #fff;
+                color: #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= MAIN WEBSITE ================= -->
+    <div id="site">
+
+        <header>
+            <div class="wrap nav">
+
+                <div class="logo">🚗 Auto<span>Care</span></div>
+
+                <nav class="links" id="links">
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#booking">Book</a>
+                    <a href="#reviews">Reviews</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#" onclick="show('login'); return false">Login</a>
+                </nav>
+
+                <div class="nav-actions">
+                    <button class="icon-btn" onclick="toggleTheme()" title="Theme">🌓</button>
+                    <button class="btn sm" onclick="startBooking()">Book Service</button>
+                    <button class="icon-btn menu" onclick="toggleMenu()">☰</button>
+                </div>
+
+            </div>
+        </header>
+
+
+        <!-- HERO -->
+        <section id="home" class="hero">
+            <div class="wrap">
+
+                <div>
+                    <p class="tag">🚘 PROFESSIONAL VEHICLE SERVICE</p>
+
+                    <h1>Your Vehicle Deserves <span>Better Care</span></h1>
+
+                    <p>
+                        Book online, get an instant price estimate, track your
+                        service live and receive a digital bill for cars,
+                        bikes and scooters.
+                    </p>
+
+                    <div class="row">
+                        <button class="btn" onclick="startBooking()">Book a Service</button>
+                        <a class="btn ghost" href="#services">Explore Services</a>
+                    </div>
+
+                    <div class="stats">
+                        <div><b data-n="5200">0</b><small>Vehicles Serviced</small></div>
+                        <div><b data-n="18">0</b><small>Expert Mechanics</small></div>
+                        <div><b data-n="98">0</b><small>% Happy Customers</small></div>
+                    </div>
+                </div>
+
+                <div class="track">
+                    <h3>🔍 Track Your Service</h3>
+
+                    <label>Booking ID</label>
+                    <input id="trackId" placeholder="e.g. AC-1001">
+
+                    <button class="btn full" onclick="trackBooking()">Check Status</button>
+
+                    <div id="trackOut" class="track-out"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SERVICES (filled by JavaScript) -->
+        <section id="services" class="s">
+            <div class="wrap">
+
+                <div class="title reveal">
+                    <p class="tag">WHAT WE OFFER</p>
+                    <h2>Our Services</h2>
+                    <p>Prices shown are for cars. Bikes and scooters cost less.</p>
+                </div>
+
+                <div class="grid" id="serviceGrid"></div>
+
+            </div>
+        </section>
+
+
+        <!-- BOOKING WIZARD -->
+        <section id="booking" class="s alt">
+            <div class="wrap box">
+
+                <div class="title reveal">
+                    <p class="tag">BOOK ONLINE</p>
+                    <h2>Schedule Your Service</h2>
+                </div>
+
+                <div class="steps" id="steps">
+                    <div>1 Vehicle</div>
+                    <div>2 Services</div>
+                    <div>3 Date &amp; Time</div>
+                    <div>4 Confirm</div>
+                </div>
+
+                <!-- Step 1 -->
+                <div id="st1">
+                    <label>Vehicle Type</label>
+                    <div class="chips" id="vtChips"></div>
+
+                    <label>Vehicle Number</label>
+                    <input id="vNo" placeholder="AP 01 AB 1234" class="upper">
+
+                    <label>Vehicle Model</label>
+                    <input id="vModel" placeholder="e.g. Hyundai Creta / Honda Activa">
+
+                    <button class="btn" onclick="go(2)">Next →</button>
+                </div>
+
+                <!-- Step 2 -->
+                <div id="st2" class="hide">
+                    <label>Select one or more services</label>
+                    <div class="chips" id="svChips"></div>
+
+                    <label>Problem Description (optional)</label>
+                    <textarea id="problem" rows="3" placeholder="Describe any issue..."></textarea>
+
+                    <div class="est" id="est"></div>
+
+                    <button class="btn ghost" onclick="go(1)">← Back</button>
+                    <button class="btn" onclick="go(3)">Next →</button>
+                </div>
+
+                <!-- Step 3 -->
+                <div id="st3" class="hide">
+                    <label>Preferred Date</label>
+                    <input type="date" id="bDate" onchange="renderSlots()">
+
+                    <label>Available Time Slots</label>
+                    <div class="chips" id="slots"></div>
+
+                    <label>Phone Number</label>
+                    <input id="bPhone" type="tel" placeholder="10-digit mobile number">
+
+                    <button class="btn ghost" onclick="go(2)">← Back</button>
+                    <button class="btn" onclick="go(4)">Next →</button>
+                </div>
+
+                <!-- Step 4 -->
+                <div id="st4" class="hide">
+                    <div class="est" id="summary"></div>
+
+                    <button class="btn ghost" onclick="go(3)">← Back</button>
+                    <button class="btn" onclick="confirmBooking()">Confirm Booking</button>
+                </div>
+
+                <!-- Success screen -->
+                <div id="st5" class="hide"></div>
+
+                <p class="msg" id="bMsg"></p>
+
+            </div>
+        </section>
+
+
+        <!-- REVIEWS -->
+        <section id="reviews" class="s">
+            <div class="wrap">
+
+                <div class="title reveal">
+                    <p class="tag">REVIEWS</p>
+                    <h2>What Customers Say</h2>
+                </div>
+
+                <div class="grid">
+
+                    <div class="card reveal">
+                        ⭐⭐⭐⭐⭐
+                        <p>"Very professional service. My car was serviced perfectly."</p>
+                        <h4>Rahul</h4>
+                    </div>
+
+                    <div class="card reveal">
+                        ⭐⭐⭐⭐⭐
+                        <p>"Booking was easy and the status tracking is great."</p>
+                        <h4>Priya</h4>
+                    </div>
+
+                    <div class="card reveal">
+                        ⭐⭐⭐⭐
+                        <p>"Transparent pricing. Highly recommended."</p>
+                        <h4>Arjun</h4>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CONTACT -->
+        <section id="contact" class="s alt">
+            <div class="wrap title">
+                <p class="tag">CONTACT</p>
+                <h2>Need Vehicle Service?</h2>
+                <p>📞 +91 98765 43210 &nbsp; 📧 support@autocare.com &nbsp; 📍 Guntur, Andhra Pradesh</p>
+                <p>🕘 Mon–Sat, 9 AM – 6 PM</p>
+            </div>
+        </section>
+
+        <footer>© 2026 AutoCare. All Rights Reserved.</footer>
+
+    </div>
+
+
+    <!-- ================= LOGIN PAGE ================= -->
+    <section id="login" class="auth hide">
+        <div class="card">
+
+            <h2>Customer Login</h2>
+            <p class="sub">Login to your AutoCare account</p>
+
+            <form onsubmit="return doLogin(event)">
+                <label>Email</label>
+                <input type="email" id="lEmail" required>
+
+                <label>Password</label>
+                <input type="password" id="lPass" required>
+
+                <button class="btn full">Login</button>
+            </form>
+
+            <p class="msg" id="lMsg"></p>
+
+            <p>
+                No account?
+                <a href="#" class="link" onclick="show('register'); return false">Create one</a>
+                ·
+                <a href="#" onclick="show('site'); return false">← Home</a>
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- ================= REGISTER PAGE ================= -->
+    <section id="register" class="auth hide">
+        <div class="card">
+
+            <h2>Create Account</h2>
+            <p class="sub">Register as a customer</p>
+
+            <form onsubmit="return doRegister(event)">
+                <label>Full Name</label>
+                <input id="rName" required>
+
+                <label>Email</label>
+                <input type="email" id="rEmail" required>
+
+                <label>Phone</label>
+                <input type="tel" id="rPhone" pattern="[0-9]{10}" title="10 digit number" required>
+
+                <label>Password (min 6 characters)</label>
+                <input type="password" id="rPass" minlength="6" required>
+
+                <label>Confirm Password</label>
+                <input type="password" id="rPass2" required>
+
+                <button class="btn full">Create Account</button>
+            </form>
+
+            <p class="msg" id="rMsg"></p>
+
+            <p>
+                Have an account?
+                <a href="#" class="link" onclick="show('login'); return false">Login</a>
+                ·
+                <a href="#" onclick="show('site'); return false">← Home</a>
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- ================= CUSTOMER DASHBOARD ================= -->
+    <section id="dashboard" class="hide">
+
+        <header>
+            <div class="wrap nav">
+                <div class="logo">🔧 Auto<span>Care</span></div>
+
+                <div class="nav-actions">
+                    <button class="icon-btn" onclick="toggleTheme()">🌓</button>
+                    <b id="uName"></b>
+                    <button class="btn sm" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="dash">
+
+            <aside class="side">
+                <a class="on" onclick="tab('tOverview', this)">🏠 Dashboard</a>
+                <a onclick="tab('tBookings', this)">📅 My Bookings</a>
+                <a onclick="tab('tVehicles', this)">🚗 My Vehicles</a>
+                <a onclick="tab('tInvoices', this)">💰 Invoices</a>
+                <a onclick="goBooking()">➕ New Booking</a>
+            </aside>
+
+            <main>
+
+                <div id="tOverview" class="pane">
+                    <h1>Welcome, <span id="wName"></span> 👋</h1>
+                    <div class="grid spaced" id="dStats"></div>
+                    <h3 class="mb">Latest Booking</h3>
+                    <div id="dLatest"></div>
+                </div>
+
+                <div id="tBookings" class="pane hide">
+                    <h2 class="mb">My Bookings</h2>
+                    <div id="bkList"></div>
+                </div>
+
+                <div id="tVehicles" class="pane hide">
+                    <h2 class="mb">My Vehicles</h2>
+                    <div class="grid" id="vList"></div>
+                </div>
+
+                <div id="tInvoices" class="pane hide">
+                    <h2 class="mb">Invoices</h2>
+                    <div class="card"><table id="invTable"></table></div>
+                    <div id="invoice" class="card hide"></div>
+                </div>
+
+            </main>
+
+        </div>
+    </section>
+
+    <div id="toast"></div>
+
+
+    <script>
+        /* =====================================================
+           1. DATA
+        ===================================================== */
+
+        // Services and base prices (for a car)
+        const SERVICES = [
+            { n: 'General Service',  i: '🔧', p: 1800, d: 'Full inspection, oil & filter change, fluid top-up.' },
+            { n: 'Oil Change',       i: '🛢️', p: 1200, d: 'Engine oil replacement with inspection.' },
+            { n: 'Wheel Alignment',  i: '🛞', p: 900,  d: 'Better stability and longer tyre life.' },
+            { n: 'Battery Service',  i: '🔋', p: 1500, d: 'Battery test, replacement and electrical check.' },
+            { n: 'AC Service',       i: '❄️', p: 2200, d: 'Cooling check, gas top-up and cleaning.' },
+            { n: 'Brake Service',    i: '🚨', p: 1600, d: 'Pad replacement and brake system maintenance.' }
+        ];
+
+        // Price multiplier by vehicle type
+        const VT = { Car: 1, Bike: 0.4, Scooter: 0.35, Other: 1.2 };
+
+        const SLOTS = [
+            '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
+            '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM'
+        ];
+
+        const STAGES = ['Booked', 'Received', 'In Progress', 'Ready', 'Delivered'];
+
+        const GST = 0.18;           // 18% tax
+        const MAX_PER_SLOT = 2;     // bookings allowed per time slot
+
+        // Booking wizard state
+        let B = { vt: '', sv: [], slot: '' };
+        let step = 1;
+
+
+        /* =====================================================
+           2. SMALL HELPERS
+        ===================================================== */
+
+        // Shortcut for document.getElementById
+        const $ = id => document.getElementById(id);
+
+        // Read from localStorage (returns fallback if empty or broken)
+        function L(key, fallback) {
+            try {
+                const value = JSON.parse(localStorage.getItem(key));
+                return value ?? fallback;
+            } catch {
+                return fallback;
+            }
+        }
+
+        // Save to localStorage
+        function S(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+            } catch {
+                // storage full or blocked, ignore
+            }
+        }
+
+        // Format a number as Indian rupees
+        function inr(n) {
+            return '₹' + Math.round(n).toLocaleString('en-IN');
+        }
+
+        // Escape user text before putting it into HTML (prevents injection)
+        function esc(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Small message popup
+        function toast(message) {
+            const t = $('toast');
+            t.textContent = message;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2600);
+        }
+
+
+        /* =====================================================
+           3. THEME + NAVIGATION
+        ===================================================== */
+
+        document.documentElement.dataset.theme = L('theme', 'light');
+
+        function toggleTheme() {
+            const root = document.documentElement;
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            S('theme', next);
+        }
+
+        function toggleMenu() {
+            $('links').classList.toggle('open');
+        }
+
+        // Show one "page" and hide the others
+        function show(page) {
+            ['site', 'login', 'register', 'dashboard'].forEach(id => {
+                $(id).classList.toggle('hide', id !== page);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        // Switch dashboard tabs
+        function tab(id, linkEl) {
+            document.querySelectorAll('.pane').forEach(p => p.classList.add('hide'));
+            $(id).classList.remove('hide');
+
+            document.querySelectorAll('.side a').forEach(a => a.classList.remove('on'));
+            if (linkEl) linkEl.classList.add('on');
+
+            renderDash();
+        }
+
+        // Dashboard "New Booking" link
+        function goBooking() {
+            show('site');
+            location.hash = '#booking';
+        }
+
+
+        /* =====================================================
+           4. SERVICES + BOOKING WIZARD
+        ===================================================== */
+
+        // Build the service cards
+        $('serviceGrid').innerHTML = SERVICES.map(s => `
+            <div class="card reveal">
+                <div class="ic">${s.i}</div>
+                <h3>${s.n}</h3>
+                <p>${s.d}</p>
+                <div class="price">from ${inr(s.p)}</div>
+                <button class="btn sm" onclick="pickService('${s.n}')">Book Now →</button>
+            </div>
+        `).join('');
+
+        // Build vehicle type chips
+        $('vtChips').innerHTML = Object.keys(VT).map(v => `
+            <button class="chip" data-v="${v}" onclick="pickVT('${v}')">${v}</button>
+        `).join('');
+
+        // Build service chips
+        $('svChips').innerHTML = SERVICES.map(s => `
+            <button class="chip" data-s="${s.n}" onclick="toggleSv('${s.n}')">${s.i} ${s.n}</button>
+        `).join('');
+
+        // Highlight the selected chips
+        function syncChips() {
+            document.querySelectorAll('#vtChips .chip').forEach(c => {
+                c.classList.toggle('sel', c.dataset.v === B.vt);
+            });
+            document.querySelectorAll('#svChips .chip').forEach(c => {
+                c.classList.toggle('sel', B.sv.includes(c.dataset.s));
+            });
+        }
+
+        function pickVT(type) {
+            B.vt = type;
+            syncChips();
+            showEstimate();
+        }
+
+        function toggleSv(name) {
+            if (B.sv.includes(name)) {
+                B.sv = B.sv.filter(x => x !== name);
+            } else {
+                B.sv.push(name);
+            }
+            syncChips();
+            showEstimate();
+        }
+
+        // Clicking "Book Now" on a service card
+        function pickService(name) {
+            B.sv = [name];
+            syncChips();
+            startBooking();
+        }
+
+        // Calculate price: subtotal, GST, total
+        function calc() {
+            const multiplier = VT[B.vt] || 1;
+            let subtotal = 0;
+
+            B.sv.forEach(name => {
+                const service = SERVICES.find(s => s.n === name);
+                subtotal += service.p * multiplier;
+            });
+
+            return {
+                sub: subtotal,
+                gst: subtotal * GST,
+                total: subtotal * (1 + GST)
+            };
+        }
+
+        function showEstimate() {
+            const c = calc();
+
+            if (!B.sv.length) {
+                $('est').innerHTML = '<span style="color:var(--mut)">Select services to see the estimate.</span>';
+                return;
+            }
+
+            $('est').innerHTML = `
+                <div><span>Estimated charges</span><span>${inr(c.sub)}</span></div>
+                <div><span>GST (18%)</span><span>${inr(c.gst)}</span></div>
+                <div class="t"><span>Estimated Total</span><span>${inr(c.total)}</span></div>
+                <small style="color:var(--mut)">Final bill may vary after inspection.</small>
+            `;
+        }
+
+        // Booking needs a logged-in user
+        function startBooking() {
+            if (!currentUser()) {
+                toast('Please login to book');
+                show('login');
+                return;
+            }
+            show('site');
+            location.hash = '#booking';
+            go(1);
+        }
+
+        // Move between wizard steps (with validation when going forward)
+        function go(n) {
+            const msg = $('bMsg');
+            msg.textContent = '';
+
+            if (n > step) {
+                if (step === 1 && (!B.vt || !$('vNo').value.trim() || !$('vModel').value.trim())) {
+                    msg.textContent = 'Choose vehicle type and fill number and model.';
+                    return;
+                }
+                if (step === 2 && !B.sv.length) {
+                    msg.textContent = 'Select at least one service.';
+                    return;
+                }
+                if (step === 3 && (!$('bDate').value || !B.slot || !/^[0-9]{10}$/.test($('bPhone').value))) {
+                    msg.textContent = 'Pick a date, a time slot and enter a valid 10-digit phone number.';
+                    return;
+                }
+            }
+
+            step = n;
+
+            // show only the current step
+            [1, 2, 3, 4, 5].forEach(i => $('st' + i).classList.toggle('hide', i !== n));
+
+            // highlight progress bar
+            [...$('steps').children].forEach((d, i) => d.classList.toggle('on', i < n));
+
+            if (n === 2) {
+                showEstimate();
+            }
+
+            if (n === 3) {
+                // earliest bookable date is tomorrow
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                $('bDate').min = tomorrow.toISOString().slice(0, 10);
+                renderSlots();
+            }
+
+            if (n === 4) {
+                const c = calc();
+                $('summary').innerHTML = `
+                    <div><span>Vehicle</span><span>${B.vt} · ${esc($('vModel').value)} (${esc($('vNo').value.toUpperCase())})</span></div>
+                    <div><span>Services</span><span>${B.sv.join(', ')}</span></div>
+                    <div><span>When</span><span>${$('bDate').value} at ${B.slot}</span></div>
+                    <div class="t"><span>Estimated Total</span><span>${inr(c.total)}</span></div>
+                `;
+            }
+        }
+
+        // Draw time slots; a slot with 2 bookings is disabled
+        function renderSlots() {
+            const date = $('bDate').value;
+            const all = L('bookings', []);
+
+            // clear the chosen slot if it is already full on this date
+            const chosenIsFull = all.filter(b => b.date === date && b.slot === B.slot).length >= MAX_PER_SLOT;
+            if (chosenIsFull) B.slot = '';
+
+            $('slots').innerHTML = SLOTS.map(s => {
+                const taken = all.filter(b => b.date === date && b.slot === s).length >= MAX_PER_SLOT;
+                const selected = B.slot === s ? 'sel' : '';
+                return `<button class="chip ${selected}" ${taken ? 'disabled' : ''} onclick="B.slot='${s}'; renderSlots()">${s}</button>`;
+            }).join('');
+        }
+
+        function confirmBooking() {
+            const user = currentUser();
+            if (!user) {
+                show('login');
+                return;
+            }
+
+            const all = L('bookings', []);
+            const id = 'AC-' + (1000 + all.length + 1);
+
+            const booking = {
+                id: id,
+                email: user.email,
+                vt: B.vt,
+                vNo: $('vNo').value.toUpperCase().trim(),
+                model: $('vModel').value.trim(),
+                services: B.sv,
+                problem: $('problem').value.trim(),
+                date: $('bDate').value,
+                slot: B.slot,
+                phone: $('bPhone').value,
+                est: calc(),
+                stage: 0,
+                created: Date.now()
+            };
+
+            all.push(booking);
+            S('bookings', all);
+
+            // success screen
+            $('st5').innerHTML = `
+                <div class="est">
+                    <h3>✅ Booking Confirmed!</h3>
+                    <p>
+                        Your booking ID is <b>${id}</b>.
+                        Visit us on ${booking.date} at ${booking.slot}.
+                        Track progress anytime with this ID.
+                    </p>
+                </div>
+                <button class="btn" onclick="show('dashboard'); renderDash()">Go to Dashboard</button>
+            `;
+            go(5);
+
+            // reset the form for the next booking
+            B = { vt: '', sv: [], slot: '' };
+            ['vNo', 'vModel', 'problem', 'bDate', 'bPhone'].forEach(f => $(f).value = '');
+            syncChips();
+
+            toast('Booking confirmed: ' + id);
+        }
+
+
+        /* =====================================================
+           5. TRACK BOOKING
+        ===================================================== */
+
+        function progress(stage) {
+            return `
+                <div class="prog">
+                    ${STAGES.map((s, i) => `<div class="${i <= stage ? 'done' : ''}">${s}</div>`).join('')}
+                </div>
+            `;
+        }
+
+        function trackBooking() {
+            const id = $('trackId').value.trim().toUpperCase();
+            const b = L('bookings', []).find(x => x.id === id);
+
+            if (!b) {
+                $('trackOut').innerHTML = '<span class="msg">No booking found for that ID.</span>';
+                return;
+            }
+
+            $('trackOut').innerHTML = `
+                <b>${esc(b.model)}</b> · ${b.services.join(', ')}<br>
+                <small>${b.date} at ${b.slot}</small>
+                ${progress(b.stage)}
+            `;
+        }
+
+
+        /* =====================================================
+           6. LOGIN / REGISTER
+           (Demo only: data stays in the browser. A real site
+           needs a backend and a database.)
+        ===================================================== */
+
+        // Turn a password into a SHA-256 hash
+        async function hash(text) {
+            const bytes = new TextEncoder().encode(text);
+            const buffer = await crypto.subtle.digest('SHA-256', bytes);
+            return [...new Uint8Array(buffer)]
+                .map(x => x.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        // Logged-in user object (or null)
+        function currentUser() {
+            const email = L('session', null);
+            if (!email) return null;
+            return L('users', []).find(u => u.email === email) || null;
+        }
+
+        async function doRegister(e) {
+            e.preventDefault();
+
+            const msg = $('rMsg');
+            const users = L('users', []);
+            const email = $('rEmail').value.trim().toLowerCase();
+
+            if ($('rPass').value !== $('rPass2').value) {
+                msg.textContent = 'Passwords do not match.';
+                return false;
+            }
+
+            if (users.some(u => u.email === email)) {
+                msg.textContent = 'Email already registered.';
+                return false;
+            }
+
+            users.push({
+                name: $('rName').value.trim(),
+                email: email,
+                phone: $('rPhone').value,
+                pass: await hash($('rPass').value)
+            });
+            S('users', users);
+
+            toast('Account created! Please login.');
+            show('login');
+            return false;
+        }
+
+        async function doLogin(e) {
+            e.preventDefault();
+
+            const email = $('lEmail').value.trim().toLowerCase();
+            const passHash = await hash($('lPass').value);
+
+            const user = L('users', []).find(u => u.email === email && u.pass === passHash);
+
+            if (!user) {
+                $('lMsg').textContent = 'Invalid email or password.';
+                return false;
+            }
+
+            S('session', email);
+            openDash();
+            return false;
+        }
+
+        function logout() {
+            localStorage.removeItem('session');
+            show('site');
+            toast('Logged out');
+        }
+
+        function openDash() {
+            const user = currentUser();
+            if (!user) {
+                show('login');
+                return;
+            }
+            $('uName').textContent = user.name;
+            $('wName').textContent = user.name;
+            show('dashboard');
+            renderDash();
+        }
+
+
+        /* =====================================================
+           7. DASHBOARD
+        ===================================================== */
+
+        // Bookings of the logged-in user, newest first
+        function myBookings() {
+            const user = currentUser();
+            return L('bookings', [])
+                .filter(b => b.email === user?.email)
+                .sort((a, b) => b.created - a.created);
+        }
+
+        function bookingCard(b) {
+            const advanceBtn = b.stage < 4
+                ? `<button class="btn sm ghost" onclick="advance('${b.id}')">Demo: advance status ▶</button>`
+                : '';
+
+            return `
+                <div class="card" style="margin-bottom:14px">
+                    <div class="bk">
+                        <div>
+                            <h3>${b.services.join(' + ')}</h3>
+                            <p>🚗 ${esc(b.model)} · ${esc(b.vNo)}</p>
+                            <p>📅 ${b.date} · ⏰ ${b.slot}</p>
+                            <p>🆔 ${b.id}</p>
+                        </div>
+                        <div>
+                            <span class="pill ${STAGES[b.stage]}">${STAGES[b.stage]}</span>
+                            <div class="price">${inr(b.est.total)}</div>
+                        </div>
+                    </div>
+                    ${progress(b.stage)}
+                    ${advanceBtn}
+                </div>
+            `;
+        }
+
+        // Demo button: pretend the shop updated the status
+        function advance(id) {
+            const all = L('bookings', []);
+            const b = all.find(x => x.id === id);
+
+            if (b && b.stage < 4) {
+                b.stage++;
+                S('bookings', all);
+                toast('Status: ' + STAGES[b.stage]);
+            }
+            renderDash();
+        }
+
+        function renderDash() {
+            if (!currentUser()) return;
+
+            const list = myBookings();
+            const done = list.filter(b => b.stage === 4);
+            const spent = done.reduce((sum, b) => sum + b.est.total, 0);
+
+            // unique vehicles by registration number
+            const vehicles = [...new Map(list.map(b => [b.vNo, b])).values()];
+
+            // stat cards
+            const stats = [
+                ['🚗', vehicles.length, 'My Vehicles'],
+                ['📅', list.filter(b => b.stage < 4).length, 'Active Bookings'],
+                ['🔧', done.length, 'Services Completed'],
+                ['💰', inr(spent), 'Total Spent']
+            ];
+
+            $('dStats').innerHTML = stats.map(s => `
+                <div class="card">
+                    <div class="ic">${s[0]}</div>
+                    <h2>${s[1]}</h2>
+                    <p>${s[2]}</p>
+                </div>
+            `).join('');
+
+            // latest booking
+            $('dLatest').innerHTML = list[0]
+                ? bookingCard(list[0])
+                : '<div class="card">No bookings yet. <a href="#" class="link" onclick="startBooking(); return false">Book your first service →</a></div>';
+
+            // all bookings
+            $('bkList').innerHTML = list.length
+                ? list.map(bookingCard).join('')
+                : '<div class="card">No bookings yet.</div>';
+
+            // vehicles
+            $('vList').innerHTML = vehicles.length
+                ? vehicles.map(b => {
+                    const icon = b.vt === 'Car' ? '🚗' : b.vt === 'Bike' ? '🏍️' : '🛵';
+                    const count = list.filter(x => x.vNo === b.vNo).length;
+                    return `
+                        <div class="card">
+                            <div class="ic">${icon}</div>
+                            <h3>${esc(b.model)}</h3>
+                            <p>${esc(b.vNo)} · ${b.vt}</p>
+                            <p>${count} booking(s)</p>
+                        </div>`;
+                }).join('')
+                : '<div class="card">Vehicles appear here after your first booking.</div>';
+
+            // invoices table
+            const rows = done.map(b => `
+                <tr>
+                    <td>${b.id}</td>
+                    <td>${b.services.join(', ')}</td>
+                    <td>${inr(b.est.total)}</td>
+                    <td><button class="btn sm" onclick="showInvoice('${b.id}')">View</button></td>
+                </tr>
+            `).join('');
+
+            $('invTable').innerHTML =
+                '<tr><th>ID</th><th>Service</th><th>Total</th><th></th></tr>' +
+                (rows || '<tr><td colspan="4">Invoices appear once a service is Delivered.</td></tr>');
+        }
+
+        function showInvoice(id) {
+            const b = L('bookings', []).find(x => x.id === id);
+            const user = currentUser();
+            const box = $('invoice');
+
+            const lines = b.services.map(name => {
+                const service = SERVICES.find(s => s.n === name);
+                return `<tr><td>${name}</td><td>${inr(service.p * (VT[b.vt] || 1))}</td></tr>`;
+            }).join('');
+
+            box.classList.remove('hide');
+            box.innerHTML = `
+                <h2>🧾 AutoCare Invoice</h2>
+                <p>Invoice for ${b.id} · ${new Date().toLocaleDateString('en-IN')}</p>
+                <p>Customer: ${esc(user.name)} (${esc(user.phone)})</p>
+                <p>Vehicle: ${esc(b.model)} – ${esc(b.vNo)}</p>
+                <table>
+                    ${lines}
+                    <tr><td>GST 18%</td><td>${inr(b.est.gst)}</td></tr>
+                    <tr><th>Total</th><th>${inr(b.est.total)}</th></tr>
+                </table>
+                <br>
+                <button class="btn sm" onclick="window.print()">🖨️ Print / Save PDF</button>
+            `;
+        }
+
+
+        /* =====================================================
+           8. EXTRAS (animations, counters, startup)
+        ===================================================== */
+
+        // Fade-in cards when they scroll into view
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Animated number counters in the hero
+        document.querySelectorAll('[data-n]').forEach(el => {
+            const target = Number(el.dataset.n);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += Math.ceil(target / 60);
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = current.toLocaleString('en-IN');
+            }, 25);
+        });
+
+        // Close the mobile menu after clicking a link
+        document.querySelectorAll('#links a').forEach(a => {
+            a.addEventListener('click', () => $('links').classList.remove('open'));
+        });
+
+        // If the user is already logged in, open the dashboard
+        if (currentUser()) {
+            openDash();
+        }
+    </script>
+
+</body>
+
+</html>
